@@ -4,7 +4,7 @@ using PetoStore.Domain.Repositories;
 using PetStore.Infrastructure.Database;
 using PetStore.Infrastructure.Database.Repositories;
 
-namespace PetStore.Infrastructure.Tests.Repositories
+namespace PetStore.Infrastructure.UnitTests.Repositories
 {
     public class PetRepositoryTests
     {
