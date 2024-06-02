@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Test Layer", "5. Test La
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C82EA29A-7B76-405B-A554-0DC2F5552984}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -28,9 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Application", "Pet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Infrastructure.UnitTests", "PetStore.Infrastructure.UnitTests\PetStore.Infrastructure.UnitTests.csproj", "{0D9AEA98-630F-46F1-BE58-9F8A6D68E87C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Application.UnitTests", "PetStore.Application.UnitTests\PetStore.Application.UnitTests.csproj", "{A05D77DA-6D0B-4D84-8429-B59B8A391B9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Application.UnitTests", "PetStore.Application.UnitTests\PetStore.Application.UnitTests.csproj", "{A05D77DA-6D0B-4D84-8429-B59B8A391B9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.WebApi.IntegrationTests", "PetStore.WebApi.IntegrationTests\PetStore.WebApi.IntegrationTests.csproj", "{4400E1CF-531B-48FF-AF4B-A8B35D2CADBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.WebApi.IntegrationTests", "PetStore.WebApi.IntegrationTests\PetStore.WebApi.IntegrationTests.csproj", "{4400E1CF-531B-48FF-AF4B-A8B35D2CADBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
