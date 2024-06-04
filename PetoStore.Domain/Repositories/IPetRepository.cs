@@ -9,11 +9,11 @@ namespace PetoStore.Domain.Repositories
 {
     public interface IPetRepository 
     {
-        Task<Pet?> GetAsync(Guid id);
-        Task<IEnumerable<Pet>> GetAllAsync();
+        Task<Pet?> GetAsync(Guid id, CancellationToken cancellationToken);
+        Task<List<Pet>> GetAllAsync(CancellationToken cancellationToken);
         Task<Pet> AddAsync(Pet pet, CancellationToken cancellationToken);
-        Task UpdateAsync(Pet pet);
-        Task DeleteAsync(Pet pet);
-        Task<IEnumerable<Pet>> GetByBreedAsync(string breed);
+        void Update(Pet pet);
+        void Delete(Pet pet);
+        Task<List<Pet>> GetByBreedAsync(string breed, CancellationToken cancellationToken);
     }
 }

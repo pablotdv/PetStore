@@ -25,29 +25,29 @@ namespace PetStore.Infrastructure.Database.Repositories
             return result.Entity;
         }
 
-        public Task DeleteAsync(Pet pet)
+        public void Delete(Pet pet)
         {
-            throw new NotImplementedException();
+            _context.Pets.Remove(pet);
         }
 
-        public Task<IEnumerable<Pet>> GetAllAsync()
+        public Task<List<Pet>> GetAllAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _context.Pets.ToListAsync(cancellationToken);
         }
 
-        public Task<Pet?> GetAsync(Guid id)
+        public Task<Pet?> GetAsync(Guid id, CancellationToken cancellationToken)
         {
-            return _context.Pets.FirstOrDefaultAsync(x=>x.Id == id);
+            return _context.Pets.FirstOrDefaultAsync(x=>x.Id == id, cancellationToken);
         }
 
-        public Task<IEnumerable<Pet>> GetByBreedAsync(string breed)
+        public Task<List<Pet>> GetByBreedAsync(string breed, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _context.Pets.Where(x => x.Breed == breed).ToListAsync(cancellationToken);
         }
 
-        public Task UpdateAsync(Pet pet)
+        public void Update(Pet pet)
         {
-            throw new NotImplementedException();
+            _context.Pets.Update(pet);
         }
     }
 }

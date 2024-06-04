@@ -6,15 +6,53 @@ using PetStore.Infrastructure.Database.Repositories;
 
 namespace PetStore.Infrastructure.UnitTests.Repositories
 {
-    public class PetRepositoryTests
+    public class PetRepositoryGetAsyncTests
+    { 
+        private readonly IPetRepository _petRepository;
+        private readonly PetStoreContext _context;
+
+        public PetRepositoryGetAsyncTests()
+        {
+            var options = new DbContextOptionsBuilder<PetStoreContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
+            _context = new(options);
+            _petRepository = new PetRepository(_context);
+        }
+
+        [Fact]
+        public async Task GetAsync_Should_Return_Pet_When_Found()
+        {
+            // Arrange
+            var pet = new Pet
+            {
+                Id = Guid.NewGuid(),
+                Name = "Fluffy",
+                Breed = "Poodle",
+                Color = "White",
+                DateOfBirth = new DateTime(2019, 1, 1),
+                Description = "A fluffy white poodle"
+            };
+            await _petRepository.AddAsync(pet, default);
+            await _context.SaveChangesAsync();
+
+            // Act
+            var result = await _petRepository.GetAsync(pet.Id, default);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(pet, result);
+        }
+    }
+    public class PetRepositoryAddAsyncTests
     {
         private readonly IPetRepository _petRepository;
         private readonly PetStoreContext _context;
 
-        public PetRepositoryTests()
+        public PetRepositoryAddAsyncTests()
         {
             var options = new DbContextOptionsBuilder<PetStoreContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())                
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             _context = new(options);
             _petRepository = new PetRepository(_context);
@@ -39,7 +77,7 @@ namespace PetStore.Infrastructure.UnitTests.Repositories
             await _context.SaveChangesAsync();
 
             // Assert
-            var addedPet = await _petRepository.GetAsync(pet.Id);
+            var addedPet = await _petRepository.GetAsync(pet.Id, default);
             Assert.NotNull(addedPet);
             Assert.Equal(pet, addedPet);
         }
@@ -62,7 +100,7 @@ namespace PetStore.Infrastructure.UnitTests.Repositories
             await _petRepository.AddAsync(pet, default);
 
             // Assert
-            await Assert.ThrowsAsync<DbUpdateException>(() => _context.SaveChangesAsync());            
+            await Assert.ThrowsAsync<DbUpdateException>(() => _context.SaveChangesAsync());
         }
 
         [Fact]

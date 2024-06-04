@@ -18,7 +18,7 @@ namespace PetStore.Application.Pets
         }
         public async Task<ResponseBase> Handle(GetPetByIdRequest request, CancellationToken cancellationToken)
         {
-            var pet = await _petRepository.GetAsync(request.Id);
+            var pet = await _petRepository.GetAsync(request.Id, cancellationToken);
             if (pet is null)
                 return new NotFoundResponse();
 

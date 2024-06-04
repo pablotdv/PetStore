@@ -29,7 +29,7 @@ namespace PetStore.Application.UnitTests.Pets
             {
                 Id = Guid.NewGuid()
             };
-            _petRepositoryMock.Setup(x => x.GetAsync(request.Id)).ReturnsAsync((Pet)null);
+            _petRepositoryMock.Setup(x => x.GetAsync(request.Id, default)).ReturnsAsync((Pet)null);
 
             // Act
             var response = await _handler.Handle(request, default);
@@ -55,7 +55,7 @@ namespace PetStore.Application.UnitTests.Pets
                 DateOfBirth = new DateTime(2019, 1, 1),
                 Description = "A fluffy white poodle"
             };
-            _petRepositoryMock.Setup(x => x.GetAsync(request.Id)).ReturnsAsync(pet);
+            _petRepositoryMock.Setup(x => x.GetAsync(request.Id, default)).ReturnsAsync(pet);
 
             // Act
             var response = await _handler.Handle(request, default);
