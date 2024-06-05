@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetStore.Application;
-using PetStore.Application.Pets;
+using PetStore.Application.Pets.Add;
+using PetStore.Application.Pets.GetById;
 
 namespace PetStore.WebApi.Controllers
 {
@@ -15,6 +16,17 @@ namespace PetStore.WebApi.Controllers
         {
             _mediator = mediator;
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] AddPetRequest request)
+        {
+            var response = await _mediator.Send(request);
+            if (response is BadRequestResponse)
+                return BadRequest();
+            var pet = response as AddPetResponse;
+            return Created(new Uri($"pets/{pet.Id}"), pet);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Get(Guid id)
         {

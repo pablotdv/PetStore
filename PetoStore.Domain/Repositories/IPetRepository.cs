@@ -15,5 +15,6 @@ namespace PetoStore.Domain.Repositories
         void Update(Pet pet);
         void Delete(Pet pet);
         Task<List<Pet>> GetByBreedAsync(string breed, CancellationToken cancellationToken);
+        Task<bool> IsUniqueNameAsync(string name, CancellationToken cancellationToken);
     }
 }

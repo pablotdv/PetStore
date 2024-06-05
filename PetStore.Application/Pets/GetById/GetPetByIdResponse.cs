@@ -1,7 +1,7 @@
-﻿namespace PetStore.Application.Pets
+﻿namespace PetStore.Application.Pets.GetById
 {
     public class GetPetByIdResponse : ResponseBase
-{
+    {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Breed { get; set; }

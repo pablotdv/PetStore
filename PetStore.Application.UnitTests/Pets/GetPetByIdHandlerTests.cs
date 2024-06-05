@@ -1,7 +1,7 @@
 ﻿using Moq;
 using PetoStore.Domain.Pets;
 using PetoStore.Domain.Repositories;
-using PetStore.Application.Pets;
+using PetStore.Application.Pets.GetById;
 using System;
 using System.Collections.Generic;
 using System.Linq;

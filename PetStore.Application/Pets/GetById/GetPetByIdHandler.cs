@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetStore.Application.Pets
+namespace PetStore.Application.Pets.GetById
 {
 
     public class GetPetByIdHandler : IRequestHandler<GetPetByIdRequest, ResponseBase>

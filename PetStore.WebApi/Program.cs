@@ -1,7 +1,10 @@
 
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using PetoStore.Domain.Repositories;
-using PetStore.Application.Pets;
+using PetStore.Application;
+using PetStore.Application.Pets.Add;
+using PetStore.Application.Pets.GetById;
 using PetStore.Infrastructure.Database;
 using PetStore.Infrastructure.Database.Repositories;
 
@@ -25,7 +28,12 @@ namespace PetStore.WebApi
                 opt.UseSqlServer(connectionString);
             });
             builder.Services.AddScoped<IPetRepository, PetRepository>();
-            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetPetByIdHandler).Assembly));
+            builder.Services.AddMediatR(config =>
+            {
+                config.RegisterServicesFromAssemblies(typeof(GetPetByIdHandler).Assembly);
+                config.AddOpenBehavior(typeof(ValidatorPipelineBehavior<,>));
+            });
+            builder.Services.AddValidatorsFromAssembly(typeof(AddPetValidator).Assembly);
 
             var app = builder.Build();
 

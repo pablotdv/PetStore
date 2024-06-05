@@ -45,6 +45,11 @@ namespace PetStore.Infrastructure.Database.Repositories
             return _context.Pets.Where(x => x.Breed == breed).ToListAsync(cancellationToken);
         }
 
+        public Task<bool> IsUniqueNameAsync(string name, CancellationToken cancellationToken)
+        {
+            return _context.Pets.AllAsync(x => x.Name != name, cancellationToken);
+        }
+
         public void Update(Pet pet)
         {
             _context.Pets.Update(pet);
