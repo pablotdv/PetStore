@@ -1,13 +1,8 @@
 ﻿using PetoStore.Domain.Pets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PetoStore.Domain.Repositories
 {
-    public interface IPetRepository 
+    public interface IPetRepository
     {
         Task<Pet?> GetAsync(Guid id, CancellationToken cancellationToken);
         Task<List<Pet>> GetAllAsync(CancellationToken cancellationToken);

@@ -12,7 +12,8 @@ namespace PetStore.Infrastructure.UnitTests
     public class RepositoryBaseTests
     {
         protected readonly PetStoreContext _context;
-
+        protected readonly string _instanceId;
+        protected readonly ITestOutputHelper _output;
         public RepositoryBaseTests(ITestOutputHelper output)
         {
             var options = new DbContextOptionsBuilder<PetStoreContext>()
@@ -21,6 +22,8 @@ namespace PetStore.Infrastructure.UnitTests
                 .Options;
             _context = new(options);
             _context = new PetStoreContext(options);
+            _instanceId = Guid.NewGuid().ToString();
+            _output = output;
         }
     }
 }

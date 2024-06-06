@@ -14,6 +14,7 @@ namespace PetStore.Infrastructure.UnitTests.Repositories
         public PetRepositoryAddAsyncTests(ITestOutputHelper output) : base(output)
         {
             _petRepository = new PetRepository(_context);
+            _output.WriteLine($"Instance ID: {_instanceId}");
         }
 
         [Fact]

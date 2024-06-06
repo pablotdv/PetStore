@@ -37,7 +37,7 @@ namespace PetStore.Infrastructure.Database.Repositories
 
         public Task<Pet?> GetAsync(Guid id, CancellationToken cancellationToken)
         {
-            return _context.Pets.FirstOrDefaultAsync(x=>x.Id == id, cancellationToken);
+            return _context.Pets.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
         public Task<List<Pet>> GetByBreedAsync(string breed, CancellationToken cancellationToken)
