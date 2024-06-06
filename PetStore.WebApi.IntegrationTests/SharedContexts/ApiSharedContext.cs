@@ -9,7 +9,7 @@ using Testcontainers.MsSql;
 namespace PetStore.Infrastructure.UnitTests.SharedContexts
 {
     [CollectionDefinition(nameof(ApiSharedContextCollection))]
-    public class ApiSharedContextCollection : ICollectionFixture<BaseControllerFixture>
+    public class ApiSharedContextCollection : ICollectionFixture<BaseControllerFixture>, ICollectionFixture<TestSharedContext>
     {
     }
 
@@ -57,6 +57,17 @@ namespace PetStore.Infrastructure.UnitTests.SharedContexts
         public void Dispose()
         {
             SqlServerContainer.StopAsync().Wait();
+        }
+    }
+
+
+
+    public class TestSharedContext
+    {
+        public string InstanceId { get; }
+        public TestSharedContext()
+        {
+            InstanceId = Guid.NewGuid().ToString();
         }
     }
 }

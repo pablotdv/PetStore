@@ -11,13 +11,16 @@ namespace PetStore.WebApi.IntegrationTests.Controllers
     {
         private readonly ITestOutputHelper _output;
         public BaseControllerFixture ControllerFixture { get; }
+        private readonly TestSharedContext _testSharedContext;
 
-        public Pets2ControllerTests(BaseControllerFixture controllerFixture, ITestOutputHelper output)
+        public Pets2ControllerTests(BaseControllerFixture controllerFixture, TestSharedContext testSharedContext, ITestOutputHelper output)
         {
             _output = output;
             _output.WriteLine("BaseControllerTests");
             ControllerFixture = controllerFixture;
             _output.WriteLine($"Fixture Instance ID: {ControllerFixture.InstanceId}");
+            _testSharedContext = testSharedContext;
+            _output.WriteLine($"testSharedContext Instance ID: {testSharedContext.InstanceId}");
         }
 
         [Fact]
@@ -58,54 +61,6 @@ namespace PetStore.WebApi.IntegrationTests.Controllers
 
             // Arrange
             Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
-        }
-
-        [Fact]
-        public async Task AddPet_Should_Return_CreatedResponse_When_ValidRequest()
-        {
-            // Arrange
-            var petRequest = new AddPetRequest
-            {
-                Name = "Fluffy",
-                Breed = "Poodle",
-                Color = "White",
-                DateOfBirth = new DateTime(2019, 1, 1),
-                Description = "A fluffy white poodle"
-            };
-
-            // Act
-            var result = await ControllerFixture.HttpClient.PostAsJsonAsync("/api/pets", petRequest);
-
-            // Arrange
-            Assert.Equal(HttpStatusCode.Created, result.StatusCode);
-        }
-
-        [Fact]
-        public async Task AddPet_Should_Return_CreatedResponse_With_Pet_When_ValidRequest()
-        {
-            // Arrange
-            var petRequest = new AddPetRequest
-            {
-                Name = "Fluffy",
-                Breed = "Poodle",
-                Color = "White",
-                DateOfBirth = new DateTime(2019, 1, 1),
-                Description = "A fluffy white poodle"
-            };
-
-            // Act
-            var result = await ControllerFixture.HttpClient.PostAsJsonAsync("/api/pets", petRequest);
-            var petResponse = await result.Content.ReadFromJsonAsync<AddPetResponse>();
-
-            // Arrange
-            Assert.Equal(HttpStatusCode.Created, result.StatusCode);
-            Assert.NotNull(petResponse);
-            Assert.NotEqual(Guid.Empty, petResponse.Id);
-            Assert.Equal(petRequest.Name, petResponse.Name);
-            Assert.Equal(petRequest.Breed, petResponse.Breed);
-            Assert.Equal(petRequest.Color, petResponse.Color);
-            Assert.Equal(petRequest.DateOfBirth, petResponse.DateOfBirth);
-            Assert.Equal(petRequest.Description, petResponse.Description);
-        }
+        }      
     }
 }
